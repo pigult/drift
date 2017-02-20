@@ -71,6 +71,8 @@ module.exports = class Drift {
       // If true, a bounding box will show the area currently being previewed
       // during touch events
       touchBoundingBox = false,
+
+      boundContainer = null
     } = options;
 
     if (inlinePane !== true && !isDOMElement(paneContainer)) {
@@ -80,7 +82,7 @@ module.exports = class Drift {
       throw new TypeError('`inlineContainer` must be a DOM element');
     }
 
-    this.settings = { namespace, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, inlineContainer, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles, hoverDelay, touchDelay, hoverBoundingBox, touchBoundingBox };
+    this.settings = { namespace, boundContainer, showWhitespaceAtEdges, containInline, inlineOffsetX, inlineOffsetY, inlineContainer, sourceAttribute, zoomFactor, paneContainer, inlinePane, handleTouch, onShow, onHide, injectBaseStyles, hoverDelay, touchDelay, hoverBoundingBox, touchBoundingBox };
 
     if (this.settings.injectBaseStyles) {
       injectBaseStylesheet();
@@ -131,6 +133,7 @@ module.exports = class Drift {
       touchBoundingBox: this.settings.touchBoundingBox,
       namespace: this.settings.namespace,
       zoomFactor: this.settings.zoomFactor,
+      boundContainer: this.settings.boundContainer
     });
   }
 

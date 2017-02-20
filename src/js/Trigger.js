@@ -16,15 +16,21 @@ export default class Trigger {
       touchBoundingBox = throwIfMissing(),
       namespace = null,
       zoomFactor = throwIfMissing(),
+      boundContainer = null
     } = options;
 
     this.settings = { el, zoomPane, sourceAttribute, handleTouch, onShow, onHide, hoverDelay, touchDelay, hoverBoundingBox, touchBoundingBox, namespace, zoomFactor };
+
+    if (!boundContainer) {
+      boundContainer = this.settings.el.offsetParent
+    }
+
 
     if (this.settings.hoverBoundingBox || this.settings.touchBoundingBox) {
       this.boundingBox = new BoundingBox({
         namespace: this.settings.namespace,
         zoomFactor: this.settings.zoomFactor,
-        containerEl: this.settings.el.offsetParent,
+        containerEl: boundContainer,
       });
     }
 
